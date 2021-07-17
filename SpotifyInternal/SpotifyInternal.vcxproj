@@ -163,6 +163,7 @@
     <ClInclude Include="detours\include\detver.h" />
     <ClInclude Include="detours\include\syelog.h" />
     <ClInclude Include="detours\include\uniHook.hpp" />
+    <ClInclude Include="memory.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

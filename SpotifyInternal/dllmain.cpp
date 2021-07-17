@@ -6,9 +6,19 @@
 #include <uniHook.hpp>
 #include <string>
 
+#include "utils.h"
+
 void __stdcall main()
 {
-	// ...
+	version_t v;
+
+	utils::get_version(&v);
+
+	if (v.dwMajor < 1 || v.dwMinor < 1)
+	{
+		MessageBoxA(nullptr, "Need a higher version", "problem", 0);
+		return;
+	}
 }
 
 BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved )
