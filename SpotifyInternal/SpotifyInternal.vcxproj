@@ -164,9 +164,13 @@
     <ClInclude Include="detours\include\detver.h" />
     <ClInclude Include="detours\include\syelog.h" />
     <ClInclude Include="detours\include\uniHook.hpp" />
-    <ClInclude Include="memory.h" />
-    <ClInclude Include="Spotify.h" />
-    <ClInclude Include="utils.h" />
+    <ClInclude Include="memory.hpp" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Spotify.hpp" />
+    <ClInclude Include="utils.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SpotifyInternal.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

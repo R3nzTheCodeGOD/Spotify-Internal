@@ -1,10 +1,9 @@
+#pragma once
 #ifndef UTILS_H
 #define UTILS_H
-#pragma once
 
 #include <Windows.h>
 #include <iostream>
-
 
 typedef struct
 {

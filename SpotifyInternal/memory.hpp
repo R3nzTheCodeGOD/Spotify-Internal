@@ -1,6 +1,6 @@
+#pragma once
 #ifndef MEMORY_H
 #define MEMORY_H
-#pragma once
 
 #include <Windows.h>
 #include <vector>

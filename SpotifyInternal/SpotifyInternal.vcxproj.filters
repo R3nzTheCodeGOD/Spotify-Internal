@@ -33,14 +33,18 @@
     <ClInclude Include="detours\include\uniHook.hpp">
       <Filter>Detours</Filter>
     </ClInclude>
-    <ClInclude Include="utils.h">
+    <ClInclude Include="utils.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="memory.h">
+    <ClInclude Include="memory.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Spotify.h">
+    <ClInclude Include="Spotify.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SpotifyInternal.rc" />
   </ItemGroup>
 </Project>

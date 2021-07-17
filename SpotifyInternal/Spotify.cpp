@@ -1,6 +1,6 @@
-#include "Spotify.h"
-#include "memory.h"
-#include "utils.h"
+#include "Spotify.hpp"
+#include "memory.hpp"
+#include "utils.hpp"
 
 Spotify* l = nullptr;
 

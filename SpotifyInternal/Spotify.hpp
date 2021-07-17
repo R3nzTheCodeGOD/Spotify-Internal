@@ -1,7 +1,6 @@
+#pragma once
 #ifndef SPOTIFY_H
 #define SPOTIFY_H
-
-#pragma once
 
 #include <iostream>
 

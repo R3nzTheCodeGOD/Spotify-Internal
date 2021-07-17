@@ -1,5 +1,4 @@
-#include "utils.h"
-#include <string>
+#include "utils.hpp"
 #pragma comment(lib, "Version.lib")
 
 typedef struct {
