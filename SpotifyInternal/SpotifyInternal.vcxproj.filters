@@ -1,14 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Kaynak Dosyalar">
+    <Filter Include="Detours">
+      <UniqueIdentifier>{db4ac997-c267-4462-9553-a1cf3265585c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
-      <Filter>Kaynak Dosyalar</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="detours\include\detours.h">
+      <Filter>Detours</Filter>
+    </ClInclude>
+    <ClInclude Include="detours\include\detver.h">
+      <Filter>Detours</Filter>
+    </ClInclude>
+    <ClInclude Include="detours\include\syelog.h">
+      <Filter>Detours</Filter>
+    </ClInclude>
+    <ClInclude Include="detours\include\uniHook.hpp">
+      <Filter>Detours</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
