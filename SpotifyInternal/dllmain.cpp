@@ -7,6 +7,7 @@
 #include <string>
 
 #include "utils.h"
+#include "Spotify.h"
 
 void __stdcall main()
 {
