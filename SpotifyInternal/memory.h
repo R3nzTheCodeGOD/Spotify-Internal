@@ -5,7 +5,7 @@
 #include <Windows.h>
 #include <vector>
 
-namespace mem
+namespace memory
 {
 	inline size_t get_mod_size(void* module)
 	{
