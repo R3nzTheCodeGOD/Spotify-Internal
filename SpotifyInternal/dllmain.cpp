@@ -12,10 +12,17 @@
 void __stdcall load_api(LPVOID* destination, LPCSTR api_name);
 
 #define API_EXPORT_ORIG(N) \
-	static LPVOID _##N = NULL; \
+	static LPVOID _##N = NULL;	\
 	char S_##N[] = "" # N; \
 	extern "C" __declspec(dllexport) __declspec(naked) void N ## () \
-	{ __asm pushad __asm push offset S_##N __asm push offset _##N __asm call load_api __asm popad __asm jmp [_##N] } \
+	{ \
+		__asm pushad \
+		__asm push offset S_##N \
+		__asm push offset _##N \
+		__asm call load_api \
+		__asm popad \
+		__asm jmp [_##N] \
+	} \
 
 API_EXPORT_ORIG(ClearReportsBetween_ExportThunk)
 API_EXPORT_ORIG(CrashForException_ExportThunk)
