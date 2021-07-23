@@ -2,7 +2,7 @@
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
 * text=auto
-*.h linguist-language=C++
+*.h linguist-language=C
 *.hpp linguist-language=C++
 
 ###############################################################################
