@@ -1,4 +1,3 @@
-
 [![C++](https://img.shields.io/badge/language-C++-%23f34b7d.svg?style=plastic)](https://en.wikipedia.org/wiki/C%2B%2B) 
 [![Spotify](https://img.shields.io/badge/App-Spotify-1DB954.svg?style=plastic)](https://www.spotify.com/)
 [![Windows](https://img.shields.io/badge/platform-Windows-0078d7.svg?style=plastic)](https://en.wikipedia.org/wiki/Microsoft_Windows) 
@@ -8,6 +7,7 @@
 
 <p align="center">
     <img height=400 src=".assets/R3nzSpotify.gif" >
+    <img height=313 src=".assets/R3nzSpotify1.png" >
     <br>
     <b><i>NO DELAY NO ADS</i></b>
 </p>
@@ -24,6 +24,7 @@
 ## **Download and Usage:**
 * Download the code **[here](https://github.com/R3nzTheCodeGOD/Spotify-Internal/releases)**
 * If the dll and `installer.bat` are in the same directory, run installer.bat and if you get the successful message everything is ok
+* `Extra Feature:` You can remove premium button and blank block using program called **noAdsScript**
 
 ## How can i disable it ?
 * You can disable it with `uinstaller.bat`, if there is a problem, delete `chrome_elf.dll` in `%appdata%/Spotify/` folder and remove the leading underscore from `_chrome_elf.dll`
