@@ -4,7 +4,7 @@
 
 Spotify* l = nullptr;
 
-Spotify::Spotify()
+Spotify::Spotify() noexcept
 {
 	auto main = GetModuleHandle(nullptr);
 	auto get_function_start = [=](uint8_t* ptr) -> uint8_t* {
@@ -34,14 +34,14 @@ Spotify::Spotify()
 		m_fn_require_focus = get_function_start(m_fn_require_focus);
 }
 
-bool Spotify::valid_ptrs()
+bool Spotify::valid_ptrs() noexcept
 {
 	return (m_jne_ad_missing_id && m_mov_skip_stuck_seconds && m_fn_is_skippable && m_fn_now_playing && m_fn_require_focus);
 }
 
 Spotify::~Spotify() = default;
 
-Spotify* Spotify::instance()
+Spotify* Spotify::instance() noexcept
 {
 	if (l == nullptr)
 		l = new Spotify();

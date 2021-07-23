@@ -9,7 +9,7 @@
 #include "utils.hpp"
 #include "Spotify.hpp"
 
-void __stdcall load_api(LPVOID* destination, LPCSTR api_name);
+void __stdcall load_api(LPVOID* destination, LPCSTR api_name) noexcept;
 
 #define API_EXPORT_ORIG(N) \
 	static LPVOID _##N = NULL;	\
@@ -50,7 +50,7 @@ API_EXPORT_ORIG(SetUploadConsent_ExportThunk)
 API_EXPORT_ORIG(SignalChromeElf)
 API_EXPORT_ORIG(SignalInitializeCrashReporting)
 
-void __stdcall load_api(LPVOID* destination, LPCSTR api_name)
+void __stdcall load_api(LPVOID* destination, LPCSTR api_name) noexcept
 {
 	if (*destination) return;
 	auto* h_mod = LoadLibrary(L"_chrome_elf.dll");
@@ -61,7 +61,7 @@ void __stdcall load_api(LPVOID* destination, LPCSTR api_name)
 char last_playing_uri[200] = { 0 };
 bool g_skip_track = false;
 
-__declspec(naked) void is_skippable_hook()
+__declspec(naked) void is_skippable_hook() noexcept
 {
 	__asm {
 		mov eax, 1
@@ -69,7 +69,7 @@ __declspec(naked) void is_skippable_hook()
 	}
 }
 
-_declspec(naked) void can_focus_hook()
+_declspec(naked) void can_focus_hook() noexcept
 {
 	__asm {
 		xor eax, eax
@@ -77,7 +77,7 @@ _declspec(naked) void can_focus_hook()
 	}
 }
 
-void __stdcall skip_track()
+void __stdcall skip_track() noexcept
 {
 	int cnt = 0;
 	while (g_skip_track && cnt++ < 2) {
@@ -90,7 +90,7 @@ void __stdcall skip_track()
 	}
 }
 
-int __fastcall now_playing_hook(char* p_this, void* edx, uintptr_t track)
+int __fastcall now_playing_hook(char* p_this, void* edx, uintptr_t track) noexcept
 {
 	auto current_track_uri = *reinterpret_cast<char**>(track + 0x184);
 	if (current_track_uri && strncmp(current_track_uri, last_playing_uri, 200)) {
@@ -106,7 +106,7 @@ int __fastcall now_playing_hook(char* p_this, void* edx, uintptr_t track)
 	return reinterpret_cast<decltype(now_playing_hook)*>(Spotify::instance()->m_fn_now_playing)(p_this, edx, track);
 }
 
-void patch_ad_missing_id()
+void patch_ad_missing_id() noexcept
 {
 	DWORD p;
 	VirtualProtect(Spotify::instance()->m_jne_ad_missing_id, 6, PAGE_EXECUTE_READWRITE, &p);
@@ -114,7 +114,7 @@ void patch_ad_missing_id()
 	VirtualProtect(Spotify::instance()->m_jne_ad_missing_id, 6, p, &p);
 }
 
-void patch_skip_stuck_seconds()
+void patch_skip_stuck_seconds() noexcept
 {
 	DWORD p;
 	VirtualProtect(Spotify::instance()->m_mov_skip_stuck_seconds, 6, PAGE_EXECUTE_READWRITE, &p);
@@ -122,14 +122,16 @@ void patch_skip_stuck_seconds()
 	VirtualProtect(Spotify::instance()->m_mov_skip_stuck_seconds, 6, p, &p);
 }
 
-int __stdcall main()
+int __stdcall main() noexcept
 {
 	version_t v;
 	utils::get_version(&v);
+
 	if (v.dwMajor < 1 || v.dwMinor < 1) {
 		MessageBoxA(nullptr, "Need a higher version", "R3nzError", 0);
 		return 0;
 	}
+
 	if (!Spotify::instance()->valid_ptrs()) {
 		MessageBoxA(nullptr, "Spotify fail", "R3nzError", 0);
 		return 0;

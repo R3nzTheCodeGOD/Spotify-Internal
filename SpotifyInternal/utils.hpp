@@ -1,6 +1,4 @@
 #pragma once
-#ifndef UTILS_H
-#define UTILS_H
 
 #include <Windows.h>
 #include <iostream>
@@ -15,8 +13,6 @@ typedef struct
 
 namespace utils
 {
-	bool get_version(version_t* v);
+	bool get_version(version_t* v) noexcept;
 
 }
-
-#endif

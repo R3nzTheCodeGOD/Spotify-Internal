@@ -1,20 +1,18 @@
 #pragma once
-#ifndef MEMORY_H
-#define MEMORY_H
 
 #include <Windows.h>
 #include <vector>
 
 namespace memory
 {
-	inline size_t get_mod_size(void* module)
+	inline size_t get_mod_size(void* module) noexcept
 	{
 		auto dos_header = reinterpret_cast<PIMAGE_DOS_HEADER>(module);
 		auto nt_header = reinterpret_cast<PIMAGE_NT_HEADERS>(reinterpret_cast<uint8_t*>(module) + dos_header->e_lfanew);
 		return nt_header->OptionalHeader.SizeOfImage;
 	}
 
-	inline uint8_t* find_pattern(void* module, size_t end, uint8_t* pattern, size_t pattern_size)
+	inline uint8_t* find_pattern(void* module, size_t end, uint8_t* pattern, size_t pattern_size) noexcept
 	{
 		auto start = reinterpret_cast<uint8_t*>(module);
 		for (auto i = 0ul; i < end - pattern_size; ++i) {
@@ -32,7 +30,7 @@ namespace memory
 		return nullptr;
 	}
 
-	inline uint8_t* pattern_scan(void* module, size_t size_of_image, const char* signature)
+	inline uint8_t* pattern_scan(void* module, size_t size_of_image, const char* signature) noexcept
 	{
 		static auto pattern_to_byte = [](const char* pattern)
 		{
@@ -61,5 +59,3 @@ namespace memory
 		return find_pattern(module, size_of_image, d, s);
 	}
 }
-
-#endif

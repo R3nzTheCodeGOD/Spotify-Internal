@@ -1,15 +1,13 @@
 #pragma once
-#ifndef SPOTIFY_H
-#define SPOTIFY_H
 
 #include <iostream>
 
 class Spotify
 {
 public:
-	Spotify();
+	Spotify() noexcept;
 	~Spotify();
-	static Spotify* instance();
+	static Spotify* instance() noexcept;
 	uint8_t* m_fn_is_skippable = nullptr;
 	uint8_t* m_fn_require_focus = nullptr;
 	uint8_t* m_fn_now_playing = nullptr;
@@ -20,5 +18,3 @@ public:
 private:
 
 };
-
-#endif
