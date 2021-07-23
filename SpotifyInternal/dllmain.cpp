@@ -122,17 +122,17 @@ void patch_skip_stuck_seconds()
 	VirtualProtect(Spotify::instance()->m_mov_skip_stuck_seconds, 6, p, &p);
 }
 
-void __stdcall main()
+int __stdcall main()
 {
 	version_t v;
 	utils::get_version(&v);
 	if (v.dwMajor < 1 || v.dwMinor < 1) {
 		MessageBoxA(nullptr, "Need a higher version", "R3nzError", 0);
-		return;
+		return 0;
 	}
 	if (!Spotify::instance()->valid_ptrs()) {
 		MessageBoxA(nullptr, "Spotify fail", "R3nzError", 0);
-		return;
+		return 0;
 	}
 
 	hk::apply_detour(can_focus_hook, Spotify::instance()->m_fn_require_focus);
@@ -140,6 +140,7 @@ void __stdcall main()
 	hk::apply_detour(is_skippable_hook, Spotify::instance()->m_fn_is_skippable);
 	patch_skip_stuck_seconds();
 	patch_ad_missing_id();
+	return 0;
 }
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved)
