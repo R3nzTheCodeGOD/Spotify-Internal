@@ -14,7 +14,7 @@ public:
 	uint8_t* m_jne_ad_missing_id = nullptr;
 	uint8_t* m_mov_skip_stuck_seconds = nullptr;
 
-	bool valid_ptrs();
+	bool valid_ptrs() noexcept;
 private:
 
 };
