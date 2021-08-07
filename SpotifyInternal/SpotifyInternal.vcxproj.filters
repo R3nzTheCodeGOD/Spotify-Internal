@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Detours">
-      <UniqueIdentifier>{db4ac997-c267-4462-9553-a1cf3265585c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
@@ -13,38 +10,19 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Spotify.cpp">
+    <ClCompile Include="exports.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="detours\include\detours.h">
-      <Filter>Detours</Filter>
-    </ClInclude>
-    <ClInclude Include="detours\include\detver.h">
-      <Filter>Detours</Filter>
-    </ClInclude>
-    <ClInclude Include="detours\include\syelog.h">
-      <Filter>Detours</Filter>
-    </ClInclude>
-    <ClInclude Include="detours\include\uniHook.hpp">
-      <Filter>Detours</Filter>
-    </ClInclude>
-    <ClInclude Include="utils.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="memory.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Spotify.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SpotifyInternal.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="chrome_elf.def">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
