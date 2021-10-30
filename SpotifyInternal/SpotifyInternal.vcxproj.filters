@@ -10,19 +10,11 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="exports.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SpotifyInternal.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="chrome_elf.def">
-      <Filter>Source Files</Filter>
-    </None>
   </ItemGroup>
 </Project>

@@ -1,6 +1,58 @@
 ﻿#include <Windows.h>
 #include <Psapi.h>
 
+void WINAPI load_api(LPVOID* destination, LPCSTR api_name) noexcept
+{
+	if (*destination)
+		return;
+
+	const auto h_mod{ ::LoadLibraryA("_chrome_elf.dll") };
+	
+	if (!h_mod)
+		return;
+
+	*destination = ::GetProcAddress(h_mod, api_name);
+}
+
+#define API_EXPORT_ORIG(N) \
+	static LPVOID _##N = NULL; \
+	char S_##N[] = "" # N; \
+	extern "C" __declspec(dllexport) __declspec(naked) void N ## () \
+	{ \
+		__asm pushad \
+		__asm push offset S_##N \
+		__asm push offset _##N \
+		__asm call load_api \
+		__asm popad \
+		__asm jmp [_##N] \
+	} \
+
+API_EXPORT_ORIG(ClearReportsBetween_ExportThunk)
+API_EXPORT_ORIG(CrashForException_ExportThunk)
+API_EXPORT_ORIG(DisableHook)
+API_EXPORT_ORIG(DrainLog)
+API_EXPORT_ORIG(DumpHungProcessWithPtype_ExportThunk)
+API_EXPORT_ORIG(DumpProcessWithoutCrash)
+API_EXPORT_ORIG(GetApplyHookResult)
+API_EXPORT_ORIG(GetBlockedModulesCount)
+API_EXPORT_ORIG(GetCrashReports_ExportThunk)
+API_EXPORT_ORIG(GetCrashpadDatabasePath_ExportThunk)
+API_EXPORT_ORIG(GetHandleVerifier)
+API_EXPORT_ORIG(GetInstallDetailsPayload)
+API_EXPORT_ORIG(GetUniqueBlockedModulesCount)
+API_EXPORT_ORIG(GetUserDataDirectoryThunk)
+API_EXPORT_ORIG(InjectDumpForHungInput_ExportThunk)
+API_EXPORT_ORIG(IsBrowserProcess)
+API_EXPORT_ORIG(IsCrashReportingEnabledImpl)
+API_EXPORT_ORIG(IsThirdPartyInitialized)
+API_EXPORT_ORIG(RegisterLogNotification)
+API_EXPORT_ORIG(RequestSingleCrashUpload_ExportThunk)
+API_EXPORT_ORIG(SetCrashKeyValueImpl)
+API_EXPORT_ORIG(SetMetricsClientId)
+API_EXPORT_ORIG(SetUploadConsent_ExportThunk)
+API_EXPORT_ORIG(SignalChromeElf)
+API_EXPORT_ORIG(SignalInitializeCrashReporting)
+
 bool DataCompare(char* pData, const char* bSig, const char* szMask) noexcept
 {
 	for (; *szMask; ++szMask, ++pData, ++bSig) {
@@ -12,7 +64,7 @@ bool DataCompare(char* pData, const char* bSig, const char* szMask) noexcept
 
 char* FindPattern(char* dwAddress, DWORD dwSize, const char* pbSig, const char* szMask) noexcept
 {
-	DWORD length{ strlen(szMask) };
+	DWORD length{ ::strlen(szMask) };
 
 	for (DWORD i{ 0 }; i < dwSize - length; ++i) {
 		__try {
@@ -28,7 +80,7 @@ char* FindPattern(char* dwAddress, DWORD dwSize, const char* pbSig, const char* 
 
 char* scan(const char* pattern, const char* mask, MODULEINFO m) noexcept
 {
-	const auto hModule{ GetModuleHandleA(nullptr) };
+	const auto hModule{ ::GetModuleHandleA(nullptr) };
 	return FindPattern((char*)hModule, m.SizeOfImage, pattern, mask);
 }
 
@@ -36,13 +88,13 @@ void removeAds(char* fn) noexcept
 {
 	DWORD oldProtect;
 
-	VirtualProtect(fn + 5, 1, PAGE_EXECUTE_READWRITE, &oldProtect);
-	memset(fn + 5, 0x90, 1);
-	VirtualProtect(fn + 5, 1, oldProtect, &oldProtect);
+	::VirtualProtect(fn + 5, 1, PAGE_EXECUTE_READWRITE, &oldProtect);
+	::memset(fn + 5, 0x90, 1);
+	::VirtualProtect(fn + 5, 1, oldProtect, &oldProtect);
 
-	VirtualProtect(fn + 6, 1, PAGE_EXECUTE_READWRITE, &oldProtect);
-	memset(fn + 6, 0xE9, 1);
-	VirtualProtect(fn + 6, 1, oldProtect, &oldProtect);
+	::VirtualProtect(fn + 6, 1, PAGE_EXECUTE_READWRITE, &oldProtect);
+	::memset(fn + 6, 0xE9, 1);
+	::VirtualProtect(fn + 6, 1, oldProtect, &oldProtect);
 }
 
 void APIENTRY main() noexcept
