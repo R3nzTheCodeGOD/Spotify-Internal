@@ -6,25 +6,23 @@
 [![Issues](https://img.shields.io/github/issues/R3nzTheCodeGOD/Spotify-Internal.svg?style=plastic)](https://github.com/R3nzTheCodeGOD/R3nzCS/issues)
 
 <p align="center">
-    <img height=400 src=".assets/R3nzSpotify.gif" >
-    <img height=313 src=".assets/R3nzSpotify1.png" >
+    <img height=400 src="https://cdn.discordapp.com/attachments/748413086083317811/927189031035494420/unknown.png" >
     <br>
-    <b><i>NO DELAY NO ADS</i></b>
+    <b><i>Spotify Internal</i></b>
 </p>
-
-# **Spotify Internal**
-
-**Note:** This DLL is for the **[Desktop release](https://www.spotify.com/download/windows/)** of Spotify on Windows and not the Microsoft Store version. If you have the microsoft version, delete it and reinstall it from the link above.
 
 ## **Features:**
 * Windows only
-* Blocks all banner/video/audio ads within the app
-* Unlocks the skip function for any track
+* Blocks all banner, video and audio ads in the client
+* Unlocks the skip function of any track
+* Full screen mode activated
+* Podcasts disabled (optional)
+* Enabled the 2021 icons redraw
+* Activated "Made For You" in the left sidebar
 
 ## **Download and Usage:**
-* Download the code **[here](https://github.com/R3nzTheCodeGOD/Spotify-Internal/releases)**
-* If the dll and `installer.bat` are in the same directory, run installer.bat and if you get the successful message everything is ok
-* `Extra Feature:` You can remove premium button and blank block using program called **noAdsScript**
+* Download the installer from **[here](https://github.com/R3nzTheCodeGOD/Spotify-Internal/releases)**
+* Run the file named `Installer.bat`
 
 ## How can i disable it ?
-* You can disable it with `uinstaller.bat`, if there is a problem, delete `chrome_elf.dll` in `%appdata%/Spotify/` folder and remove the leading underscore from `_chrome_elf.dll`
+* Reinstall spotify
