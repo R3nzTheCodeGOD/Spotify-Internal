@@ -37,5 +37,9 @@
     <None Include="..\scripts\uinstaller.bat">
       <Filter>Scripts</Filter>
     </None>
+    <None Include="..\.gitattributes" />
+    <None Include="..\.gitignore" />
+    <None Include="..\LICENSE" />
+    <None Include="..\README.md" />
   </ItemGroup>
 </Project>

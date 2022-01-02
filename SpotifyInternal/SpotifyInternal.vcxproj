@@ -75,6 +75,10 @@
     <ResourceCompile Include="SpotifyInternal.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\.gitattributes" />
+    <None Include="..\.gitignore" />
+    <None Include="..\LICENSE" />
+    <None Include="..\README.md" />
     <None Include="..\scripts\installer.bat" />
     <None Include="..\scripts\noAdsScript.py" />
     <None Include="..\scripts\uinstaller.bat" />
