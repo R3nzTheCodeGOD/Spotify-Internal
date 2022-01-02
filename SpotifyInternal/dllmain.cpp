@@ -1,4 +1,5 @@
-﻿#include <Windows.h>
+﻿#pragma warning(disable:4326)
+#include <Windows.h>
 #include <Psapi.h>
 
 void WINAPI load_api(LPVOID* destination, LPCSTR api_name) noexcept
@@ -12,15 +13,12 @@ void WINAPI load_api(LPVOID* destination, LPCSTR api_name) noexcept
 	char S_##N[] = "" # N; \
 	extern "C" __declspec(dllexport) __declspec(naked) void N ## () \
 	{ \
-		__asm \
-		{ \
-			pushad \
-			push offset S_##N \
-			push offset _##N \
-			call load_api \
-			popad \
-			jmp [_##N] \
-		} \
+		__asm pushad \
+		__asm push offset S_##N \
+		__asm push offset _##N \
+		__asm call load_api \
+		__asm popad \
+		__asm jmp [_##N] \
 	} \
 
 API_EXPORT_ORIG(ClearReportsBetween_ExportThunk)
