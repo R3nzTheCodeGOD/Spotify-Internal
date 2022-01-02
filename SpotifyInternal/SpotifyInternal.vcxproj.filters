@@ -5,6 +5,12 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{63625bc9-b402-4d7d-81d3-9356cd6618fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{6e085065-a677-46e9-8302-d6766b4ec639}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -12,9 +18,24 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource.h" />
+    <ResourceCompile Include="SpotifyInternal.rc">
+      <Filter>Resource</Filter>
+    </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="SpotifyInternal.rc" />
+    <ClInclude Include="resource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\scripts\installer.bat">
+      <Filter>Scripts</Filter>
+    </None>
+    <None Include="..\scripts\noAdsScript.py">
+      <Filter>Scripts</Filter>
+    </None>
+    <None Include="..\scripts\uinstaller.bat">
+      <Filter>Scripts</Filter>
+    </None>
   </ItemGroup>
 </Project>
