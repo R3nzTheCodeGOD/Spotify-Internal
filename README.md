@@ -26,3 +26,7 @@
 
 ## How can i disable it ?
 * Reinstall spotify
+
+## Credits
+* [BlockTheSpot](https://github.com/master131/BlockTheSpot)
+* [SpotX](https://github.com/amd64fox/SpotX)

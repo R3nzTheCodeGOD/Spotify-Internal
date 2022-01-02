@@ -3,6 +3,8 @@
 *.hpp linguist-language=C++
 *.c linguist-language=C
 *.cpp linguist-language=C++
+*.ps1 linguist-language=C++
+*.bat linguist-language=PowerShell
 *.sln       merge=binary
 *.csproj    merge=binary
 *.vbproj    merge=binary
