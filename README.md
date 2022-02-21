@@ -19,6 +19,8 @@
 * Podcasts disabled (optional)
 * Enabled the 2021 icons redraw
 * Activated "Made For You" in the left sidebar
+* Enabled enhance Playlist UI and functionality
+* Enabled a condensed discography shelf on artist pages
 
 ## **Download and Usage:**
 * Download the installer from **[here](https://github.com/R3nzTheCodeGOD/Spotify-Internal/releases)**

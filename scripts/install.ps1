@@ -165,7 +165,9 @@ If (Test-Path $xpui_js_patch) {
             -replace '(Enable block users feature in clientX",default:)(!1)', '$1!0' `
             -replace '(Enables quicksilver in-app messaging modal",default:)(!0)', '$1!1' `
             -replace '(With this enabled, clients will check whether tracks have lyrics available",default:)(!1)', '$1!0' `
-            -replace '(Enables new playlist creation flow in Web Player and DesktopX",default:)(!1)', '$1!0'
+            -replace '(Enables new playlist creation flow in Web Player and DesktopX",default:)(!1)', '$1!0' `
+            -replace '(Enable Enhance Playlist UI and functionality",default:)(!1)', '$1!0' `
+            -replace '(Enable a condensed disography shelf on artist pages",default:)(!1)', '$1!0'
         if ($Podcasts_off) {
             $new_js = $new_js `
                 -replace '"album,playlist,artist,show,station,episode"', '"album,playlist,artist,station"' -replace ',this[.]enableShows=[a-z]', ""
@@ -216,7 +218,8 @@ If (Test-Path $xpui_spa_patch) {
             -replace '(Enable block users feature in clientX",default:)(!1)', '$1!0' `
             -replace '(Enables quicksilver in-app messaging modal",default:)(!0)', '$1!1' `
             -replace '(With this enabled, clients will check whether tracks have lyrics available",default:)(!1)', '$1!0' `
-            -replace '(Enables new playlist creation flow in Web Player and DesktopX",default:)(!1)', '$1!0'
+            -replace '(Enables new playlist creation flow in Web Player and DesktopX",default:)(!1)', '$1!0' `
+            -replace '(Enable Enhance Playlist UI and functionality",default:)(!1)', '$1!0'
         if ($Podcasts_off) {
             $xpuiContents = $xpuiContents `
                 -replace '"album,playlist,artist,show,station,episode"', '"album,playlist,artist,station"' -replace ',this[.]enableShows=[a-z]', ""
