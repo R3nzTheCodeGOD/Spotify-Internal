@@ -58,10 +58,7 @@ Write-Host "Downloading the latest version of SpotifyInternal..."`n
 
 $webClient = New-Object -TypeName System.Net.WebClient
 try {
-    $webClient.DownloadFile(
-        'https://github.com/R3nzTheCodeGOD/Spotify-Internal/releases/latest/download/SpotifyInternal.zip',
-        "$PWD\SpotifyInternal.zip"
-    )
+    $webClient.DownloadFile('https://github.com/R3nzTheCodeGOD/Spotify-Internal/releases/latest/download/SpotifyInternal.zip', "$PWD\SpotifyInternal.zip")
 } catch {
     Write-Output ''
     Start-Sleep
@@ -74,12 +71,8 @@ $spotifyInstalled = (Test-Path -LiteralPath $SpotifyExecutable)
 if (-not $spotifyInstalled) {
     
     try {
-        $webClient.DownloadFile(
-            'https://download.scdn.co/SpotifySetup.exe',
-            "$PWD\SpotifySetup.exe"
-        )
-    }
-    catch {
+        $webClient.DownloadFile('https://download.scdn.co/SpotifySetup.exe', "$PWD\SpotifySetup.exe")
+    } catch {
         Write-Output ''
         Pause
         exit
@@ -170,7 +163,7 @@ If (Test-Path $xpui_js_patch) {
             -replace '(Enable a condensed disography shelf on artist pages",default:)(!1)', '$1!0'
         if ($Podcasts_off) {
             $new_js = $new_js `
-                -replace '"album,playlist,artist,show,station,episode"', '"album,playlist,artist,station"' -replace ',this[.]enableShows=[a-z]', ""
+                -replace 'album,playlist,artist,show,station,episode', 'album,playlist,artist,station' -replace ',this[.]enableShows=[a-z]', ""
         }
 
         Set-Content -Path $xpui_js_patch -Force -Value $new_js
@@ -220,9 +213,10 @@ If (Test-Path $xpui_spa_patch) {
             -replace '(With this enabled, clients will check whether tracks have lyrics available",default:)(!1)', '$1!0' `
             -replace '(Enables new playlist creation flow in Web Player and DesktopX",default:)(!1)', '$1!0' `
             -replace '(Enable Enhance Playlist UI and functionality",default:)(!1)', '$1!0'
+            -replace '(Enable a condensed disography shelf on artist pages",default:)(!1)', '$1!0'
         if ($Podcasts_off) {
             $xpuiContents = $xpuiContents `
-                -replace '"album,playlist,artist,show,station,episode"', '"album,playlist,artist,station"' -replace ',this[.]enableShows=[a-z]', ""
+                -replace 'album,playlist,artist,show,station,episode', 'album,playlist,artist,station' -replace ',this[.]enableShows=[a-z]', ""
         }
 
         $writer = New-Object System.IO.StreamWriter($entry_xpui.Open())
