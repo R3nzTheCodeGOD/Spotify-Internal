@@ -149,21 +149,24 @@ If (Test-Path $xpui_js_patch) {
         
         $new_js = $xpui_js `
             -replace 'adsEnabled:!0', 'adsEnabled:!1' `
-            -replace '(session[,]{1}[a-z]{1}[=]{1}[a-z]{1}[=]{1}[>]{1}[{]{1}var [a-z]{1}[,]{1}[a-z]{1}[,]{1}[a-z]{1}[;]{1}[a-z]{6})(["]{1}free["]{1})', '$1"premium"' `
-            -replace '([a-z]{1}[.]{1}toLowerCase[(]{1}[)]{2}[}]{1}[,]{1}[a-z]{1}[=]{1}[a-z]{1}[=]{1}[>]{1}[{]{1}var [a-z]{1}[,]{1}[a-z]{1}[,]{1}[a-z]{1}[;]{1}return)(["]{1}premium["]{1})', '$1"free"' `
             -replace "allSponsorships", "" `
+            -replace '(return|.=.=>)"free"===(.+?)(return|.=.=>)"premium"===', '$1"premium"===$2$3"free"===' `
             -replace '(Show "Made For You" entry point in the left sidebar.,default:)(!1)', '$1!0' `
-            -replace '(Enables the 2021 icons redraw which loads a different font asset for rendering icon glyphs.",default:)(!1)', '$1!0' `
+            -replace '(Enable the new Search with chips experience",default:)(!1)', '$1!0' `
             -replace '(Enable Liked Songs section on Artist page",default:)(!1)', '$1!0' `
             -replace '(Enable block users feature in clientX",default:)(!1)', '$1!0' `
             -replace '(Enables quicksilver in-app messaging modal",default:)(!0)', '$1!1' `
             -replace '(With this enabled, clients will check whether tracks have lyrics available",default:)(!1)', '$1!0' `
             -replace '(Enables new playlist creation flow in Web Player and DesktopX",default:)(!1)', '$1!0' `
-            -replace '(Enable Enhance Playlist UI and functionality",default:)(!1)', '$1!0' `
-            -replace '(Enable a condensed disography shelf on artist pages",default:)(!1)', '$1!0'
+            -replace '(Enable Enhance Playlist UI and functionality for end-users",default:)(!1)', '$1!0' `
+            -replace '(Enable a condensed disography shelf on artist pages",default:)(!1)', '$1!0' `
+            -replace '(Enable the new fullscreen lyrics page",default:)(!1)', '$1!0' `
+            -replace '(Enable Playlist Permissions flows for Prod",default:)(!1)', '$1!0' `
+            -replace '(Enable Enhance Liked Songs UI and functionality",default:)(!1)', '$1!0'
         if ($Podcasts_off) {
             $new_js = $new_js `
-                -replace 'album,playlist,artist,show,station,episode', 'album,playlist,artist,station' -replace ',this[.]enableShows=[a-z]', ""
+                -replace '(return this\.queryParameters=(.),)', '$2.types=["album","playlist","artist","station"];$1' `
+                -replace ',this[.]enableShows=[a-z]', ""
         }
 
         Set-Content -Path $xpui_js_patch -Force -Value $new_js
@@ -201,22 +204,23 @@ If (Test-Path $xpui_spa_patch) {
 
         $xpuiContents = $xpuiContents `
             -replace 'adsEnabled:!0', 'adsEnabled:!1' `
-            -replace '(session[,]{1}[a-z]{1}[=]{1}[a-z]{1}[=]{1}[>]{1}[{]{1}var [a-z]{1}[,]{1}[a-z]{1}[,]{1}[a-z]{1}[;]{1}[a-z]{6})(["]{1}free["]{1})', '$1"premium"' `
-            -replace '([a-z]{1}[.]{1}toLowerCase[(]{1}[)]{2}[}]{1}[,]{1}[a-z]{1}[=]{1}[a-z]{1}[=]{1}[>]{1}[{]{1}var [a-z]{1}[,]{1}[a-z]{1}[,]{1}[a-z]{1}[;]{1}return)(["]{1}premium["]{1})', '$1"free"' `
             -replace "allSponsorships", "" `
-            -replace "sp://logging/v3/\w+", "" `
+            -replace '(return|.=.=>)"free"===(.+?)(return|.=.=>)"premium"===', '$1"premium"===$2$3"free"===' `
             -replace '(Show "Made For You" entry point in the left sidebar.,default:)(!1)', '$1!0' `
-            -replace '(Enables the 2021 icons redraw which loads a different font asset for rendering icon glyphs.",default:)(!1)', '$1!0' `
+            -replace '(Enable the new Search with chips experience",default:)(!1)', '$1!0' `
             -replace '(Enable Liked Songs section on Artist page",default:)(!1)', '$1!0' `
             -replace '(Enable block users feature in clientX",default:)(!1)', '$1!0' `
             -replace '(Enables quicksilver in-app messaging modal",default:)(!0)', '$1!1' `
             -replace '(With this enabled, clients will check whether tracks have lyrics available",default:)(!1)', '$1!0' `
             -replace '(Enables new playlist creation flow in Web Player and DesktopX",default:)(!1)', '$1!0' `
-            -replace '(Enable Enhance Playlist UI and functionality",default:)(!1)', '$1!0'
-            -replace '(Enable a condensed disography shelf on artist pages",default:)(!1)', '$1!0'
+            -replace '(Enable Enhance Playlist UI and functionality for end-users",default:)(!1)', '$1!0' `
+            -replace '(Enable a condensed disography shelf on artist pages",default:)(!1)', '$1!0' `
+            -replace '(Enable the new fullscreen lyrics page",default:)(!1)', '$1!0' `
+            -replace '(Enable Playlist Permissions flows for Prod",default:)(!1)', '$1!0' `
+            -replace '(Enable Enhance Liked Songs UI and functionality",default:)(!1)', '$1!0'
         if ($Podcasts_off) {
             $xpuiContents = $xpuiContents `
-                -replace 'album,playlist,artist,show,station,episode', 'album,playlist,artist,station' -replace ',this[.]enableShows=[a-z]', ""
+                -replace '(return this\.queryParameters=(.),)', '$2.types=["album","playlist","artist","station"];$1' -replace ',this[.]enableShows=[a-z]', ""
         }
 
         $writer = New-Object System.IO.StreamWriter($entry_xpui.Open())
@@ -245,6 +249,7 @@ If (Test-Path $xpui_spa_patch) {
             $readercss.Close()
 
             $xpuiContents_css = $xpuiContents_css `
+                -replace "}\[dir=ltr\]\s?([.a-zA-Z\d[_]+?,\[dir=ltr\])", '}[dir=str] $1' `
                 -replace "}\[dir=ltr\]\s?", "} " `
                 -replace "html\[dir=ltr\]", "html" `
                 -replace ",\s?\[dir=rtl\].+?(\{.+?\})", '$1' `
@@ -256,7 +261,11 @@ If (Test-Path $xpui_spa_patch) {
                 -replace "\[lang=ar\].+?\{.+?\}", "" `
                 -replace "html\[dir=rtl\].+?\{.+?\}", "" `
                 -replace "html\[lang=ar\].+?\{.+?\}", "" `
-                -replace "\[dir=rtl\].+?\{.+?\}", ""
+                -replace "\[dir=rtl\].+?\{.+?\}", "" `
+                -replace "\[dir=str\]", "[dir=ltr]" `
+                -replace "[/]\*([^*]|[\r\n]|(\*([^/]|[\r\n])))*\*[/]", "" `
+                -replace "[/][/]#\s.*", "" `
+                -replace "\r?\n(?!\(1|\d)", ""
             
             $writer = New-Object System.IO.StreamWriter($_.Open())
             $writer.BaseStream.SetLength(0)
